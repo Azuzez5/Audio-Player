@@ -1,0 +1,436 @@
+/* =========================
+GLOBAL
+========================= */
+
+body{
+font-family:Arial, Helvetica, sans-serif;
+color:white;
+padding:20px;
+margin-bottom:120px;
+
+background:#050505;
+
+min-height:100vh;
+overflow-x:hidden;
+position:relative;
+}
+
+
+/* =========================
+AURORA BACKGROUND
+========================= */
+
+body::before{
+content:"";
+position:fixed;
+width:1400px;
+height:1400px;
+
+background:
+radial-gradient(circle,#1db954 0%,transparent 60%);
+
+top:-500px;
+left:-400px;
+
+filter:blur(200px);
+opacity:0.25;
+
+animation:aurora1 35s infinite alternate ease-in-out;
+
+z-index:-2;
+}
+
+body::after{
+content:"";
+position:fixed;
+width:1200px;
+height:1200px;
+
+background:
+radial-gradient(circle,#3b82f6 0%,transparent 60%);
+
+bottom:-400px;
+right:-400px;
+
+filter:blur(200px);
+opacity:0.25;
+
+animation:aurora2 40s infinite alternate ease-in-out;
+
+z-index:-2;
+}
+
+.bg-aurora{
+position:fixed;
+
+width:1200px;
+height:1200px;
+
+background:
+radial-gradient(circle,#9333ea 0%,transparent 65%);
+
+top:30%;
+left:30%;
+
+filter:blur(220px);
+opacity:0.22;
+
+animation:aurora3 45s infinite alternate ease-in-out;
+
+z-index:-2;
+}
+
+
+/* =========================
+NOISE TEXTURE
+========================= */
+
+.noise{
+pointer-events:none;
+
+position:fixed;
+inset:0;
+
+background-image:url("https://grainy-gradients.vercel.app/noise.svg");
+
+opacity:0.07;
+
+z-index:-1;
+}
+
+
+/* =========================
+TITLE
+========================= */
+
+h1{
+text-align:center;
+margin-bottom:20px;
+letter-spacing:1px;
+}
+
+
+/* =========================
+TOPBAR
+========================= */
+
+.topbar{
+display:flex;
+gap:10px;
+justify-content:center;
+margin-bottom:20px;
+flex-wrap:wrap;
+}
+
+
+/* =========================
+BUTTONS
+========================= */
+
+button{
+
+background:#1db954;
+border:none;
+padding:6px 10px;
+
+border-radius:6px;
+color:white;
+
+cursor:pointer;
+
+transition:0.2s;
+
+}
+
+button:hover{
+
+background:#1ed760;
+transform:scale(1.05);
+
+}
+
+
+/* =========================
+DROP ZONE
+========================= */
+
+#dropZone{
+
+border:2px dashed #555;
+
+padding:25px;
+
+text-align:center;
+
+margin-bottom:20px;
+
+background:rgba(255,255,255,0.03);
+
+border-radius:10px;
+
+transition:0.3s;
+
+backdrop-filter:blur(10px);
+
+}
+
+#dropZone:hover{
+
+border-color:#1db954;
+
+background:rgba(29,185,84,0.08);
+
+}
+
+
+/* =========================
+TRACK LIST
+========================= */
+
+#trackList{
+
+list-style:none;
+padding:0;
+
+max-width:800px;
+margin:auto;
+
+}
+
+
+/* =========================
+TRACK ITEM
+========================= */
+
+.track{
+
+padding:10px;
+margin-bottom:6px;
+
+cursor:grab;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+background:rgba(30,30,30,0.6);
+
+backdrop-filter:blur(10px);
+
+border-radius:8px;
+
+transition:0.2s;
+
+}
+
+.track:hover{
+
+background:rgba(60,60,60,0.6);
+
+transform:scale(1.01);
+
+}
+
+
+/* =========================
+PLAYER
+========================= */
+
+#player{
+
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+
+background:rgba(20,20,20,0.8);
+
+backdrop-filter:blur(12px);
+
+display:flex;
+align-items:center;
+
+padding:12px;
+gap:15px;
+
+border-top:1px solid #333;
+
+}
+
+
+/* =========================
+COVER
+========================= */
+
+#cover{
+
+width:60px;
+height:60px;
+
+background:#333;
+
+border-radius:6px;
+
+}
+
+
+/* =========================
+INFO
+========================= */
+
+#info{
+
+flex:1;
+
+}
+
+
+/* =========================
+CONTROLS
+========================= */
+
+.controls button{
+
+font-size:18px;
+margin:0 5px;
+
+}
+
+
+/* =========================
+WAVE CANVAS
+========================= */
+
+canvas{
+width:100%;
+height:42px;
+
+background:linear-gradient(
+90deg,
+rgba(0,0,0,0.6),
+rgba(0,0,0,0.2)
+);
+
+border-radius:6px;
+
+}
+
+
+/* =========================
+PROGRESS BAR
+========================= */
+
+input[type="range"]{
+
+appearance:none;
+
+height:4px;
+
+background:#333;
+
+border-radius:2px;
+
+}
+
+input[type="range"]::-webkit-slider-thumb{
+
+appearance:none;
+
+width:12px;
+height:12px;
+
+border-radius:50%;
+
+background:#1db954;
+
+cursor:pointer;
+
+}
+
+
+/* =========================
+TIME DISPLAY
+========================= */
+
+#time{
+
+font-size:13px;
+opacity:0.8;
+
+}
+
+
+/* =========================
+MINI MODE
+========================= */
+
+.mini #trackList{
+display:none;
+}
+
+.mini #dropZone{
+display:none;
+}
+
+body.mini{
+padding-bottom:80px;
+}
+
+
+/* =========================
+AURORA ANIMATIONS
+========================= */
+
+@keyframes aurora1{
+
+0%{
+transform:translate(0,0) scale(1);
+}
+
+50%{
+transform:translate(200px,100px) scale(1.2);
+}
+
+100%{
+transform:translate(-100px,200px) scale(1);
+}
+
+}
+
+@keyframes aurora2{
+
+0%{
+transform:translate(0,0) scale(1);
+}
+
+50%{
+transform:translate(-150px,-80px) scale(1.25);
+}
+
+100%{
+transform:translate(120px,-120px) scale(1);
+}
+
+}
+
+@keyframes aurora3{
+
+0%{
+transform:translate(-100px,0) scale(1);
+}
+
+50%{
+transform:translate(80px,-100px) scale(1.2);
+}
+
+100%{
+transform:translate(-120px,120px) scale(1);
+}
+
+}
+.playing{
+background:#1db95433;
+color:#22c55e;
+font-weight:bold;
+border-radius:6px;
+}
