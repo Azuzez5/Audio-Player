@@ -53,8 +53,14 @@ const cover = document.getElementById("cover")
 const canvas = document.getElementById("wave")
 const ctx = canvas.getContext("2d")
 
-canvas.width = canvas.offsetWidth
+function resizeCanvas(){
+canvas.width = canvas.clientWidth
 canvas.height = 40
+}
+
+resizeCanvas()
+
+window.addEventListener("resize",resizeCanvas)
 
 /* ================================
 DATABASE
@@ -755,4 +761,5 @@ const uploadFolder=document.getElementById("uploadFolder")
 
 uploadFolder.onchange=e=>{
 handleFiles(e.target.files)
+
 }
