@@ -506,3 +506,10 @@ width:120px;
 }
 
 }
+
+button{
+min-width:36px;
+min-height:36px;
+font-size:16px;
+border-radius:8px;
+}
