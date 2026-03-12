@@ -433,4 +433,76 @@ background:#1db95433;
 color:#22c55e;
 font-weight:bold;
 border-radius:6px;
+
+}
+/* MOBILE RESPONSIVE */
+
+@media (max-width: 768px){
+
+body{
+padding:10px;
+font-size:16px;
+}
+
+h1{
+font-size:22px;
+text-align:center;
+}
+
+/* top bar */
+.topbar{
+flex-direction:column;
+gap:8px;
+}
+
+/* upload area */
+#dropZone{
+padding:20px;
+font-size:14px;
+}
+
+/* track list */
+.track{
+flex-direction:column;
+align-items:flex-start;
+gap:6px;
+padding:10px;
+}
+
+.track div{
+display:flex;
+gap:6px;
+flex-wrap:wrap;
+}
+
+/* controls */
+.controls{
+flex-wrap:wrap;
+gap:10px;
+justify-content:center;
+}
+
+/* bottom player */
+.player{
+flex-direction:column;
+gap:10px;
+padding:10px;
+}
+
+/* cover */
+#cover{
+width:50px;
+height:50px;
+}
+
+/* progress bar */
+#progress{
+width:100%;
+}
+
+/* volume */
+#volume{
+width:120px;
+}
+
 }
