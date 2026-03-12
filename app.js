@@ -27,6 +27,8 @@ let shuffle = false
 let repeat = false
 let queue = []
 
+let touchStartY = 0
+let touchIndex = null
 /* ================================
 DOM
 ================================ */
@@ -182,6 +184,34 @@ const li = document.createElement("li")
 
 li.className = "track"
 li.draggable = true
+/* mobile swipe reorder */
+
+li.ontouchstart = e => {
+
+touchStartY = e.touches[0].clientY
+touchIndex = i
+
+}
+
+li.ontouchend = e => {
+
+const endY = e.changedTouches[0].clientY
+
+const diff = endY - touchStartY
+
+if(Math.abs(diff) < 30) return
+
+if(diff < 0){
+
+moveTrackDown(touchIndex)
+
+}else{
+
+moveTrackUp(touchIndex)
+
+}
+
+}
 
 if (i === currentIndex) {
 li.classList.add("playing")
@@ -191,12 +221,21 @@ const isPlaying = i === currentIndex && !audio.paused
 
 li.innerHTML = `
 <span>${isPlaying ? "⏸ " : "▶ "} ${t.name}</span>
-<div>
+
+<div class="trackControls">
+
 <button class="playBtn" data-i="${i}">
 ${isPlaying ? "⏸" : "▶"}
 </button>
+
+<button onclick="moveTrackUp(${i})">⬆</button>
+<button onclick="moveTrackDown(${i})">⬇</button>
+
+<button onclick="addQueue(${i})">➕</button>
+
 <button onclick="deleteTrack(${i})">🗑</button>
 <button onclick="downloadTrack(${i})">⬇</button>
+
 </div>
 `
 
@@ -249,6 +288,21 @@ updatePlayIcons()
 /* ================================
 MOVE TRACK
 ================================ */
+function moveTrackUp(i){
+
+if(i===0) return
+
+moveTrack(i,i-1)
+
+}
+
+function moveTrackDown(i){
+
+if(i===tracks.length-1) return
+
+moveTrack(i,i+1)
+
+}
 
 function moveTrack(a, b) {
 
@@ -540,9 +594,11 @@ animateWave()
 QUEUE
 ================================ */
 
-function addQueue(i) {
+function addQueue(i){
 
 queue.push(tracks[i].id)
+
+console.log("Queue:",queue)
 
 }
 
